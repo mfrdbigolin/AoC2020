@@ -6,8 +6,9 @@
 """General utilities."""
 
 
-# Avoid ambiguous namespace with the built-in exit.
+# Avoid ambiguous namespace with the built-in exit and compile.
 from sys import exit as finish
+from re import compile as regex_comp
 
 
 def open_file(fname):
@@ -19,7 +20,7 @@ def open_file(fname):
 
 
 def arrange(values, dtype=str, sep="\n"):
-    """Separate list <values> according to separator <sep> and return a
+    """Separate list <values> according to the separator <sep> and return a
     list of <dtype>s.  """
 
     return [dtype(v) for v in values.split(sep) if v != ""]
@@ -31,3 +32,18 @@ def usage_and_exit(is_exit):
         print("usage: ./dayN INPUT")
 
         finish(1)
+
+
+def regex(values, dtypes, form):
+    """Organize a array of <values> according to a <form> regular
+    expression string, return a tuple with the matched with the types
+    <dtypes>.  """
+
+    # Typify a tuple of values <ts> according to a tuple of types <dtypes>.
+    transfig = \
+        lambda ts, dtypes: tuple(dtypes[i](t) for (i, t) in enumerate(ts))
+
+    reg = regex_comp(form)
+    matched = [transfig(reg.findall(l)[0], dtypes) for l in values]
+
+    return matched
