@@ -53,3 +53,12 @@ def regex(values, dtypes, form):
 def product(arr):
     """Return the product of a sequence of elements of <arr>."""
     return reduce(lambda a,b: a*b, arr)
+
+
+def assoc(soc, preds):
+    """Map the predicates contained in dictionary <preds> to the
+    values contained in dictionary <soc> and return tautology if all
+    associations are truthful.  """
+
+    return all([preds.get(k)(soc.get(k)) for k in soc.keys() \
+                if preds.get(k) is not None])
