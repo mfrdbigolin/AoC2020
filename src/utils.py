@@ -9,6 +9,7 @@
 # Avoid ambiguous namespace with the built-in exit and compile.
 from sys import exit as finish
 from re import compile as regex_comp
+from functools import reduce
 
 
 def open_file(fname):
@@ -47,3 +48,8 @@ def regex(values, dtypes, form):
     matched = [transfig(reg.findall(l)[0], dtypes) for l in values]
 
     return matched
+
+
+def product(arr):
+    """Return the product of a sequence of elements of <arr>."""
+    return reduce(lambda a,b: a*b, arr)
