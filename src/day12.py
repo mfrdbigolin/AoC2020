@@ -44,11 +44,9 @@ def solve(actions, way = None, anchor = True):
                 ship[DIR.index(act) // 2] += scale(act, off)
             else:
                 way[DIR.index(act) // 2] += scale(act, off)
-
-        if act == "F":
+        elif act == "F":
             ship = [ship[0] + off*way[0], ship[1] + off*way[1]]
-
-        if act in "RL":
+        elif act in "RL":
             ang = deg_rad(off) if act == "L" else -deg_rad(off)
             way = rot(way, ang)
 
