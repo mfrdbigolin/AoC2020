@@ -79,3 +79,18 @@ def mod_inv(div, modulo):
 
     # Use the modulo operator again to keep only positive numbers.
     return carry[0] % modulo
+
+
+def fill(lst, mold, subs):
+    """For every <mold> element in <lst>, substitute for the according
+    <subs> value (indexically).  """
+
+    nlst = list(lst).copy()
+
+    j = 0
+    for i, elem in enumerate(lst):
+        if elem == mold:
+            nlst[i] = subs[j]
+            j += 1
+
+    return nlst
