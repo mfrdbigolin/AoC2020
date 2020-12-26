@@ -12,7 +12,7 @@ from re import findall
 from utils import open_file, arrange, usage_and_exit, product, mod_inv
 
 
-def solve(buses, est):
+def solve1(buses, est):
     """Get the earliest bus from the <buses> according to the <est>imate
     time.  """
 
@@ -49,5 +49,5 @@ if __name__ == "__main__":
     depart_data = [i for i,d in enumerate(findall(r"\w+", input_file[1]))
                    if d != "x"]
 
-    print(solve(bus_data, estimate))
+    print(solve1(bus_data, estimate))
     print(solve2(bus_data, depart_data))
