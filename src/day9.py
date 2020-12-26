@@ -36,7 +36,7 @@ cum_sum = lambda ls, i: sum(ls[:i + 1])
 
 
 def solve2(lst, k):
-    """Find in a list <lst> a group of any size whose sum equals <k>.  """
+    """Find in a list <lst> a group of any size whose sum equals <k>."""
 
     for i in range(len(lst)):
         for j in range(len(lst)):

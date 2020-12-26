@@ -13,7 +13,7 @@ from utils import open_file, arrange, usage_and_exit, regex, fill
 
 
 def masker(mask, val):
-    """Enforce the defined bits in the <mask> on <val>.  """
+    """Enforce the defined bits in the <mask> on <val>."""
 
     ones = sub(r"[^1]", "0", mask)
     val |= int(ones,2)
