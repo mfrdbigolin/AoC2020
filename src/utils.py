@@ -8,12 +8,13 @@
 
 # Avoid ambiguous namespace with the built-in exit and compile.
 from sys import exit as finish
-from re import compile as regex_comp
+from re import findall
 from functools import reduce
 
 
 def open_file(fname):
     """Open <fname> and return its contents."""
+
     with open(fname, "r") as reader:
         data = reader.read()
 
@@ -29,10 +30,20 @@ def arrange(values, dtype=str, sep="\n"):
 
 def usage_and_exit(is_exit):
     """If <is_exit>, print usage and exit."""
+
     if is_exit:
         print("usage: ./dayN INPUT")
 
         finish(1)
+
+
+# Typify a tuple of values <ts> according to a tuple of types <dtypes>.
+transfig = \
+    lambda ts, dtypes: tuple(dtypes[i](t) for (i, t) in enumerate(ts))
+
+
+# Typify a array of tuples <ts> according to a tuple of types <dtypes>.
+transfiged = lambda ts, dtypes: [transfig(t, dtypes) for t in ts]
 
 
 def regex(values, dtypes, form):
@@ -40,18 +51,12 @@ def regex(values, dtypes, form):
     expression string, return a tuple with the matched with the types
     <dtypes>.  """
 
-    # Typify a tuple of values <ts> according to a tuple of types <dtypes>.
-    transfig = \
-        lambda ts, dtypes: tuple(dtypes[i](t) for (i, t) in enumerate(ts))
-
-    reg = regex_comp(form)
-    matched = [transfig(reg.findall(l)[0], dtypes) for l in values]
-
-    return matched
+    return [transfig(findall(form, l)[0], dtypes) for l in values]
 
 
 def product(arr):
     """Return the product of a sequence of elements of <arr>."""
+
     return reduce(lambda a,b: a*b, arr)
 
 
@@ -94,3 +99,12 @@ def fill(lst, mold, subs):
             j += 1
 
     return nlst
+
+
+# Transform elements from array <ds> into a dictionary, with its head as
+# its key and the tail as its values.
+dictf = lambda ds: dict(zip([ds[0]], [ds[1:]] if ds[1:] != [] else []))
+
+
+# Cumulatively merge alike elements from <d>.
+merge = lambda d: reduce(lambda a, b: a | b, d)
