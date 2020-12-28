@@ -9,7 +9,7 @@
 from sys import argv
 from re import findall
 
-from utils import open_file, arrange, usage_and_exit, product, mod_inv
+from utils import open_file, arrange, usage_and_exit, product
 
 
 def solve1(buses, est):
@@ -35,7 +35,7 @@ def solve2(buses, depart):
     # Cross multiplication of the elements in the sequence.
     cross_mul = [product(buses)//b for b in buses]
 
-    return sum([c*mod_inv(c, b)*m for b, c, m
+    return sum([c*pow(c, -1, b)*m for b, c, m
                in zip(buses, cross_mul, mods)]) % product(buses)
 
 

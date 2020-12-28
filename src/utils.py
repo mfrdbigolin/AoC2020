@@ -69,23 +69,6 @@ def assoc(soc, preds):
                 if preds.get(k) is not None])
 
 
-def mod_inv(div, modulo):
-    """Return the modular inverse k, such that <div>⋅k≡1(mod <modulo>),
-    i.e., k≡<div>⁻¹ (mod <modulo>).  This function uses the Extended
-    Euclidean Algorithm.  """
-
-    carry = [0, 1]
-    carrier = [div, modulo]
-
-    while carrier[0] != 0:
-        quot = carrier[1]//carrier[0]
-        carry = [carry[1], carry[0] - quot * carry[1]]
-        carrier = [carrier[1] % carrier[0], carrier[0]]
-
-    # Use the modulo operator again to keep only positive numbers.
-    return carry[0] % modulo
-
-
 def fill(lst, mold, subs):
     """For every <mold> element in <lst>, substitute for the according
     <subs> value (indexically).  """
