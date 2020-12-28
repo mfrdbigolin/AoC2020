@@ -108,3 +108,7 @@ dictf = lambda ds: dict(zip([ds[0]], [ds[1:]] if ds[1:] != [] else []))
 
 # Cumulatively merge alike elements from <d>.
 merge = lambda d: reduce(lambda a, b: a | b, d)
+
+
+# Calculate the pairwise difference between elements of a list <lst>.
+diff = lambda lst: [pair[0] - pair[1] for pair in zip(lst[1:], lst[:-1])]
