@@ -1,6 +1,6 @@
 #!/bin/python3
 
-# Copyright (C) 2020 Matheus Fernandes Bigolin <mfrdrbigolin@disroot.org>
+# Copyright (C) 2020, 2021 Matheus Fernandes Bigolin <mfrdrbigolin@disroot.org>
 # SPDX-License-Identifier: MIT
 
 """General utilities."""
@@ -10,6 +10,7 @@
 from sys import exit as finish
 from re import findall
 from functools import reduce
+from collections import Counter
 
 
 def open_file(fname):
@@ -95,3 +96,17 @@ merge = lambda d: reduce(lambda a, b: a | b, d)
 
 # Calculate the pairwise difference between elements of a list <lst>.
 diff = lambda lst: [pair[0] - pair[1] for pair in zip(lst[1:], lst[:-1])]
+
+
+def frequency(lst):
+    """Return a Counter with the frequency of the elements in <lst>."""
+    freq = Counter()
+
+    for elem in lst:
+        freq[elem] += 1
+
+    return freq
+
+
+# Frequency with depth two.
+freqd2 = lambda s: reduce(lambda a,b: a + b, [frequency(i) for i in s])
